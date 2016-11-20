@@ -1,0 +1,20 @@
+{
+  "name": "dbms",
+  "version": "1.0.0",
+  "description": "DBMS project on airline reservation system done by students of MSRIT ISE",
+  "main": "server.js",
+  "dependencies": {
+    "knex": "^0.12.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "dbms"
+  },
+  "author": "Elson, Eshwar, Anthony, Gopan",
+  "license": "MIT"
+}
