@@ -1,0 +1,70 @@
+body{
+	padding: 0px;
+	margin:0px;
+
+	background: url(flight.jpg) no-repeat center center fixed;
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+}
+#header{
+	padding-top: 10px;
+	background: #9999CC;
+	text-align: center;
+	font-size: 36pt;
+}
+article{
+/*
+	background: #00ff00 url("flight.jpg") no-repeat scroll center;
+	background-size: cover;
+	background-attachment: scroll;
+*/
+	height: 520px;
+	width: 100%;
+}
+nav{
+	padding: 0px;
+	text-align: left;
+	background: #FFFFFF;
+	font-size: 12pt;
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFF;
+}
+nav li{
+    display: inline;
+    float: left;
+}
+nav li a {
+    display: block;
+	color: #000;;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #CCC;
+}
+#right{
+	float: right;
+}
+#book{
+	width: 70%;
+	margin: auto;
+	height: 30%;
+	background: #FFF0AA;
+	vertical-align: center;
+	position: relative;
+	top: 85%;
+	transform: translateY(-50%);
+	border-radius: 10px;
+}
+article div p{
+	text-align: center;
+	vertical-align: middle;
+}

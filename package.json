@@ -4,7 +4,8 @@
   "description": "DBMS project on airline reservation system done by students of MSRIT ISE",
   "main": "server.js",
   "dependencies": {
-    "knex": "^0.12.6"
+    "knex": "^0.12.6",
+    "mysql": "^2.12.0"
   },
   "devDependencies": {},
   "scripts": {
