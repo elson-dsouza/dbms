@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title My Travel Website
+    link(rel='stylesheet', type='text/css', href='index.css')
+  body
+    #header
+      header
+        | My Travel Website
+      nav
+        ul
+          li
+            a(href='#') HOME
+          li
+            a(href='#') SEARCH
+          li
+            a(href='#') HISTORY
+          li
+            a(href='#') ACCOUNT
+          li
+            a(href='#') ABOUT
+          li#right
+            a(href='') SIGN IN
+          li#right
+            a(href='') SIGN UP
+    article
+      #book
+        table
+          thead
+            tr
+              th Flight ID
+              th Airline Name
+              th From Location
+              th To Location
+              th Departure time
+              th Arrival time
+              th Duration
+          tbody
+            each item in rows
+              tr
+                td= item.flight_id
+                td= item.airline_name
+                td= item.from_location
+                td= item.to_location
+                td= item.departure_time
+                td= item.arrival_time
+                td= item.duration
