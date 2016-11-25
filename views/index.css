@@ -2,25 +2,25 @@ body{
 	padding: 0px;
 	margin:0px;
 
-	background: url(flight.jpg) no-repeat center center fixed;
+	background: url(flight1.jpg) no-repeat center center fixed; 
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
 	  background-size: cover;
 }
 #header{
-	padding-top: 10px;
-	background: #9999CC;
+	padding-top: 10px; 
+	background: #ffb900;
 	text-align: center;
 	font-size: 36pt;
 }
 article{
 /*
-	background: #00ff00 url("flight.jpg") no-repeat scroll center;
+	background: #00ff00 url("flight.jpg") no-repeat scroll center; 
 	background-size: cover;
 	background-attachment: scroll;
 */
-	height: 520px;
+	height: 520px; 
 	width: 100%;
 }
 nav{
@@ -50,6 +50,9 @@ nav li a {
 li a:hover {
     background-color: #CCC;
 }
+.active{
+	background-color: #CCC;
+}
 #right{
 	float: right;
 }
@@ -57,7 +60,7 @@ li a:hover {
 	width: 70%;
 	margin: auto;
 	height: 30%;
-	background: #FFF0AA;
+	background: rgba(255, 255, 255, .7);
 	vertical-align: center;
 	position: relative;
 	top: 85%;
@@ -67,4 +70,11 @@ li a:hover {
 article div p{
 	text-align: center;
 	vertical-align: middle;
+}
+.onethird{
+    box-sizing: border-box;
+	width: 33%;
+	border-right: 1px solid black;
+	display: inline-block;
+	text-align: center;
 }
