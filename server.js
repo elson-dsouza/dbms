@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-app.use(express.static('front_end'))
+app.use(express.static('views'))
 var path = require('path');
 var pug= require('pug');
 app.set('view engine', 'pug')
@@ -23,8 +23,8 @@ var server = app.listen(8080, function () {
 })
 
 app.get('/',function(req,res){
-        //res.sendFile(path.join(__dirname + '/front_end/index.html'));
-        knex.select().from('flight').then(function(rows) {var html=pug.renderFile('front_end/index_test.pug',{rows:rows});
+        //res.sendFile(path.join(__dirname + '/views/index.html'));
+        knex.select().from('flight').then(function(rows) {var html=pug.renderFile('views/index_test.pug',{rows:rows});
                                                          res.send(html);
                                                           console.log("Pug rendered\n");})
         })
