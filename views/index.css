@@ -108,7 +108,37 @@ li a:hover {
 .norightborder{
 	border-right: 0px;
 }*/
-
+footer{
+	width: 100%;
+	padding: 0px;
+	text-align: left;
+	background: #FFFFFF;
+	font-size: 12pt;
+	position: fixed;
+	vertical-align: bottom;
+	z-index: 100;
+	bottom: 0px;
+}
+footer li{
+    display: inline;
+    float: left;
+    display: block;
+	color: #000;;
+    text-align: center;
+    padding: 14px 16px;
+}
+footer #right{
+	float: right;
+}
+/*footer li a {
+    text-decoration: none;
+}*/
+footer li:hover {
+    background-color: #CCC;
+}
+.active{
+	background-color: #CCC;
+}
 /*About specific css*/
 #about{
 	width: 70%;
