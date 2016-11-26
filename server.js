@@ -17,24 +17,35 @@ var knex = require('knex')({
 });
 
 var server = app.listen(8080, function () {
-	var host = server.address().address
-	var port = server.address().port
+	var host = server.address().family;
+	var port = server.address().port;
 
-	console.log("\nListening at http://%s:%s\n",host ,port)
-})
+  console.log("\nListening at http://%s:%s\n",host ,port);
+});
+
+var flightRouter = require('routes/flightRouter');
+
+app.use('/flight', flightRouter);
+
 
 app.get('/',function(req,res){
-        //res.sendFile(path.join(__dirname + '/views/index.html'));
-        knex.select().from('flight').then(function(rows) {
-          var html=pug.renderFile('views/index_test.pug',{rows:rows});
-          res.send(html);
-          console.log("Pug of index page rendered\n");})
-        })
+  //res.sendFile(path.join(__dirname + '/views/index.html'));
+  knex.select().from('flight').then(function(rows) {
+    knex.distinct(from_location).from(flights).then(function(rows){
+      var html=pug.renderFile('views/index_test.pug',{rows:rows});
+      res.send(html);
+      console.log("Pug of index page rendered\n");})
+    })
+})
+
 app.get('/about', function(req, res) {
   var html=pug.renderFile('views/about.pug');
   res.send(html);
   console.log("Pug of about page rendered\n");
-  // res.sendFile(path.join(__dirname + '/views/about.html'))
+});
+
+
+// res.sendFile(path.join(__dirname + '/views/about.html'))
 //		knex.select().from('flight_details').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('credit_card_details').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('location').then(function(rows) {console.log(rows); res.send(rows);})
@@ -42,4 +53,3 @@ app.get('/about', function(req, res) {
 //		knex.select().from('ticket_info').then(function(rows) {console.log(rows); res.send(rows);})
     //res.send("Test");
 
-});
