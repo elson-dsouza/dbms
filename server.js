@@ -17,21 +17,18 @@ var knex = require('knex')({
 });
 
 var server = app.listen(8080, function () {
-	var host = server.address().family;
+	var host = server.address().address;
 	var port = server.address().port;
 
   console.log("\nListening at http://%s:%s\n",host ,port);
 });
 
-var flightRouter = require('routes/flightRouter');
-
-app.use('/flight', flightRouter);
-
+// var flightRouter = require(__dirname + 'routes/flightRouter.js');
 
 app.get('/',function(req,res){
   //res.sendFile(path.join(__dirname + '/views/index.html'));
   knex.select().from('flight').then(function(rows) {
-    knex.distinct(from_location).from(flights).then(function(rows){
+    knex.distinct('from_location').select().from('flight').orderBy('from_location', 'asc').then(function(rows){
       var html=pug.renderFile('views/index_test.pug',{rows:rows});
       res.send(html);
       console.log("Pug of index page rendered\n");})
@@ -44,6 +41,15 @@ app.get('/about', function(req, res) {
   console.log("Pug of about page rendered\n");
 });
 
+app.get('/flight', function(req, res) {
+  var from = req.header.from;
+  var to = req.header.to;
+  knex('flight').where({ from_location: from, to_location:  to }).select('id').then(function(rows){
+    res.render('flight', rows);
+  })
+});
+
+// app.use('/flight', flightRouter);
 
 // res.sendFile(path.join(__dirname + '/views/about.html'))
 //		knex.select().from('flight_details').then(function(rows) {console.log(rows); res.send(rows);})
