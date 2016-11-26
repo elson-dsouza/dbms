@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+app.use(express.static('public'))
 app.use(express.static('views'))
 var path = require('path');
 var pug= require('pug');
