@@ -5,43 +5,62 @@ html
     link(rel='stylesheet', type='text/css', href='index.css')
   body
     #header
-      header
-        | My Travel Website
+      header  My Travel Website
       nav
         ul
-          li
+          li.active
             a(href='#') HOME
-          li
-            a(href='#') SEARCH
           li
             a(href='#') HISTORY
           li
             a(href='#') ACCOUNT
           li
-            a(href='#') ABOUT
+            a(href='about.html') ABOUT
           li#right
             a(href='') SIGN IN
           li#right
             a(href='') SIGN UP
     article
       #book
-        table
-          thead
-            tr
-              th Flight ID
-              th Airline Name
-              th From Location
-              th To Location
-              th Departure time
-              th Arrival time
-              th Duration
-          tbody
-            each item in rows
-              tr
-                td= item.flight_id
-                td= item.airline_name
-                td= item.from_location
-                td= item.to_location
-                td= item.departure_time
-                td= item.arrival_time
-                td= item.duration
+        #book-upper
+          #book-upper-center
+            form
+              select
+                option(value= 0)  select
+                each item in rows
+                  option(value = item.from_location) #{item.from_location} 
+              select
+                option(value= 0)  select
+                each item in rows
+                  option(value = item.to_location) #{item.to_location} 
+              
+        #book-lower
+          p
+          |  hello
+        //- form
+        //-   .onethird  
+        //-   .onethird  hello
+        //-   .onethird.norightborder  hello
+
+        //- table
+        //-   thead
+        //-     tr
+        //-       th Flight ID
+        //-       th Airline Name
+        //-       th From Location
+        //-       th To Location
+        //-       th Departure time
+        //-       th Arrival time
+        //-       th Duration
+        //-   tbody
+        //-     each item in rows
+        //-       tr
+        //-         td= item.flight_id
+        //-         td= item.airline_name
+        //-         td= item.from_location
+        //-         td= item.to_location
+        //-         td= item.departure_time
+        //-         td= item.arrival_time
+        //-         td= item.duration
+
+    footer
