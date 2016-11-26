@@ -24,17 +24,21 @@ var server = app.listen(8080, function () {
 
 app.get('/',function(req,res){
         //res.sendFile(path.join(__dirname + '/views/index.html'));
-        knex.select().from('flight').then(function(rows) {var html=pug.renderFile('views/index_test.pug',{rows:rows});
-                                                         res.send(html);
-                                                          console.log("Pug rendered\n");})
+        knex.select().from('flight').then(function(rows) {
+          var html=pug.renderFile('views/index_test.pug',{rows:rows});
+          res.send(html);
+          console.log("Pug of index page rendered\n");})
         })
-    .get('/test', function(req, res) {
-
+app.get('/about', function(req, res) {
+  var html=pug.renderFile('views/about.pug');
+  res.send(html);
+  console.log("Pug of about page rendered\n");
+  // res.sendFile(path.join(__dirname + '/views/about.html'))
 //		knex.select().from('flight_details').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('credit_card_details').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('location').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('passenger_profile').then(function(rows) {console.log(rows); res.send(rows);})
 //		knex.select().from('ticket_info').then(function(rows) {console.log(rows); res.send(rows);})
-    res.send("Test");
+    //res.send("Test");
 
 });
