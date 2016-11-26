@@ -29,11 +29,11 @@ html
                 select
                   option(value= 0)  select
                   each item in rows
-                    option(value = item.from_location) #{item.from_location} 
+                    option(value = item.from_location, name='from') #{item.from_location} 
                 select
                   option(value= 0)  select
                   each item in rows
-                    option(value = item.to_location) #{item.from_location} 
+                    option(value = item.to_location, name = 'to') #{item.from_location} 
                 
           #book-lower
             button(type='submit', form='form1', value='Submit') Submit

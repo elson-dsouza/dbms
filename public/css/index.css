@@ -26,7 +26,7 @@ article{
 	background-size: cover;
 	background-attachment: scroll;
 */
-	height: 620px; 
+	height: 500px; 
 	width: 100%;
 	margin: 0px;
 }
@@ -83,10 +83,10 @@ li a:hover {
     box-sizing: border-box;
     height: 60%;
 	display: flex;
-	justify-content: space-around;
+	justify-content:space-around;
 }
 #book-upper-center{
-	align-self: center;
+	/*align-self: center;*/
 }
 
 #book-lower{
@@ -146,9 +146,12 @@ footer li:hover {
 #about{
 	width: 70%;
 	margin: auto;
-	background: rgba(255, 255, 255, .7);
+	background: rgba(255, 255, 255, .8);
 	border-radius: 10px;
-	padding: 15px;
+	padding: 5px;
+	margin-top: 15px;
+	margin-bottom: 15px; 
+	text-align: center
 }
 #about h1{
 	text-align: center;
