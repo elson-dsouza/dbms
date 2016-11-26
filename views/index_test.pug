@@ -15,28 +15,27 @@ html
           li
             a(href='#') ACCOUNT
           li
-            a(href='about.html') ABOUT
+            a(href='/about') ABOUT
           li#right
             a(href='') SIGN IN
           li#right
             a(href='') SIGN UP
     article
       #book
-        #book-upper
-          #book-upper-center
-            form
-              select
-                option(value= 0)  select
-                each item in rows
-                  option(value = item.from_location) #{item.from_location} 
-              select
-                option(value= 0)  select
-                each item in rows
-                  option(value = item.to_location) #{item.to_location} 
-              
-        #book-lower
-          p
-          |  hello
+        form(method='get', action='/search')
+          #book-upper
+            #book-upper-center
+                select
+                  option(value= 0)  select
+                  each item in rows
+                    option(value = item.from_location) #{item.from_location} 
+                select
+                  option(value= 0)  select
+                  each item in rows
+                    option(value = item.to_location) #{item.to_location} 
+                
+          #book-lower
+            button(type='submit', form='form1', value='Submit') Submit
         //- form
         //-   .onethird  
         //-   .onethird  hello

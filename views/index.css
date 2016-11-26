@@ -25,6 +25,7 @@ article{
 */
 	height: 620px; 
 	width: 100%;
+	margin: 0px;
 }
 nav{
 	padding: 0px;
@@ -58,6 +59,9 @@ li a:hover {
 }
 #right{
 	float: right;
+}
+#form{
+	height: 100%;
 }
 #book{
 	width: 70%;
@@ -104,3 +108,12 @@ li a:hover {
 .norightborder{
 	border-right: 0px;
 }*/
+
+/*About specific css*/
+#about{
+	width: 70%;
+	margin: auto;
+	height: 25%;
+	background: rgba(255, 255, 255, .7);
+	border-radius: 10px;
+}
