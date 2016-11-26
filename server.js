@@ -6,14 +6,30 @@ var path = require('path');
 var pug= require('pug');
 app.set('view engine', 'pug')
 
-var knex = require('knex')({
-  client: 'mysql',
-  connection: {
+// var knex = require('knex')({
+//   client: 'mysql',
+//   connection: {
+//     host : 'localhost',
+//     user : 'root',
+//     password : '',
+//     database : 'airline'
+//   }
+// });
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
     password : '',
     database : 'airline'
+});
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
   }
+ 
+  console.log('connected as id ' + connection.threadId);
 });
 
 var server = app.listen(8080, function () {
@@ -27,13 +43,18 @@ var server = app.listen(8080, function () {
 
 app.get('/',function(req,res){
   //res.sendFile(path.join(__dirname + '/views/index.html'));
-  knex.select().from('flight').then(function(rows) {
-    knex.distinct('from_location').select().from('flight').orderBy('from_location', 'asc').then(function(rows){
+  // knex.select().from('flight').then(function(rows) {
+  //   knex.distinct('from_location').select().from('flight').orderBy('from_location', 'asc').then(function(rows){
+  //     var html=pug.renderFile('views/index_test.pug',{rows:rows});
+  //     res.send(html);
+  //     console.log("Pug of index page rendered\n");})
+  //   })
+  connection.query('SELECT distinct `from_location` FROM `flight` ORBER BY `from_location` asc', function (error, rows, fields) {
       var html=pug.renderFile('views/index_test.pug',{rows:rows});
       res.send(html);
-      console.log("Pug of index page rendered\n");})
-    })
-})
+      console.log("Pug of index page rendered\n");
+    });
+});
 
 app.get('/about', function(req, res) {
   var html=pug.renderFile('views/about.pug');
@@ -42,11 +63,12 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/flight', function(req, res) {
-  var from = req.header.from;
-  var to = req.header.to;
-  knex('flight').where({ from_location: from, to_location:  to }).select('id').then(function(rows){
-    res.render('flight', rows);
-  })
+  var from = req.headers.from;
+  var to = req.headers.to;
+  connection.query('SELECT * FROM `flight` WHERE `from_location` = "'+from+'"' + ' and `to_location` = "'+to+'"', function (error, results, fields) {
+    console.log("results" + results[0].from_location);
+      res.render('flight', {results:  results});
+  });
 });
 
 // app.use('/flight', flightRouter);
