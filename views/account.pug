@@ -38,13 +38,8 @@ html
               td Address
               td 676, edfgh road,
           hr
-
-          h1 Credit card details
-          form(method='post', action='/enterCreditCardDetails')
-            button(type='submit', form='searchForm', value='Submit') Enter New Credit Card Information
           
           if creditInfoAvailable
-            hr
             h1 Creditcard1
             table
               tr
@@ -56,6 +51,11 @@ html
               tr 
                 td Expiry
                 td 07/23
+          else
+            h1 Credit card details
+            form(method='post', action='/enterCreditCardDetails')
+              button(type='submit', form='searchForm', value='Submit') Enter New Credit Card Information
+
 
     footer
       ul
