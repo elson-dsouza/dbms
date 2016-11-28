@@ -66,7 +66,7 @@ app.post('/flight',urlencodedParser, function(req, res) {
   var from = req.body.from;
   var to = req.body.to;
 
-  knex('flight').where({
+  knex('flight').join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').where({
     'from_location': from,
     'to_location': to}).select().then(function(results){
     var resultsExists='true';
@@ -86,11 +86,13 @@ app.post('/register',urlencodedParser, function(req, res) {
     tel_no : req.body.phone
               };
     var confirm_password = req.body.confirm_password;
-    if(confirm_password!=response[password])
+    if(confirm_password!=response.password)
         res.render('signup',{msg : "Password entered do not match!!!"});
     else {
-        knex('passenger_profile').insert(response).catch(function(err){
-            res.render('signup',{msg : "Insertion error!!!"});
+        knex('passenger_profile').insert(response).then(function(results){
+            res.redirect('/')
+        }).catch(function(err){
+            res.render('signup');
         })
     }
 });
