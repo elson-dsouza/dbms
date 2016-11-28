@@ -23,6 +23,7 @@ app.set('view engine', 'pug')
 //    password : '',
 //    database : 'airline'
 //});
+
 //connection.connect(function(err) {
 //  if (err) {
 //    console.error('error connecting: ' + err.stack);
@@ -64,10 +65,10 @@ app.get('/about', function(req, res) {
 app.get('/flight', function(req, res) {
   var from = req.headers.from;
   var to = req.headers.to;
+
   knex('flight').where({
     'from_location': from,
-      'to+location': to}).select().then(function(rows){
-//  connection.query('SELECT * FROM `flight` WHERE `from_location` = "'+from+'"' + ' and `to_location` = "'+to+'"', function (error, results, fields) {
+    'to_location': to}).select().then(function(rows){
     console.log("results" + results[0].from_location);
       res.render('flight', {results:  results});
   });
