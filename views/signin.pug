@@ -16,16 +16,26 @@ html
             a(href='/account') ACCOUNT
           li
             a(href='/about') ABOUT
-          li#right.active
-            a(href='/signin') SIGN IN
           li#right
+            a(href='#') SIGN IN
+          li#right.active
             a(href='/signup') SIGN UP
     #placeholder
     div
       article
         #about
-          h1 Sign in
-          p To be populated!
+          h1 Sign IN
+          form(method='post', action='/validate', id='signInForm')
+            #msg #{msg}
+            p
+              label(value='Email') Email:
+              input(type='email', placeholder='Email', name='email')
+            p
+              label(value='Password') Password:
+              input(type='password', placeholder='Password', name='password')
+            p 
+              button(type='submit', form='signInForm', value='Submit') SIGN IN
+
 
     footer
       ul
