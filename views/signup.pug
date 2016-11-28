@@ -25,8 +25,9 @@ html
       article
         #about
           h1 Sign Up
+          h5#msg #{msg}
           form(method='post', action='/register', id='signUpForm')
-            #msg
+            
             p
               label(value='Name') Name:
               input(type='text', placeholder='First Name', name='first_name')

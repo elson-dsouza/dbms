@@ -66,6 +66,9 @@ li a:hover {
 #form{
 	height: 100%;
 }
+#msg{
+	color: red;
+}
 #book{
 	width: 70%;
 	margin: auto;
@@ -100,15 +103,16 @@ li a:hover {
 /*article div p{
 	text-align: center;
 	vertical-align: middle;
-}
+}*/
 .onethird{
     box-sizing: border-box;
 	width: 33%;
-	border-right: 1px solid rgba(187, 160, 160, 0.7);
+	/*border-right: 1px solid rgba(187, 160, 160, 0.7);*/
 	display: inline-block;
 	text-align: center;
 }
-.norightborder{
+
+/*.norightborder{
 	border-right: 0px;
 }*/
 footer{
