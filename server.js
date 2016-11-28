@@ -30,24 +30,28 @@ var server = app.listen(8080, function () {
 });
 
 // var flightRouter = require(__dirname + 'routes/flightRouter.js');
+var sess = {isEnabled : false, fname : null, lname : null, email : null};
 
 app.get('/',function(req,res){
-   knex.select().from('flight').then(function(rows) {
+  // sess = res.session;
+  knex.select().from('flight').then(function(rows) {
      knex.distinct('from_location').select().from('flight').orderBy('from_location', 'asc').then(function(rows){
-       var html=pug.renderFile('views/index_test.pug',{rows:rows});
+       
+       var html=pug.renderFile('views/index_test.pug',{rows:rows, session: sess});
        res.send(html);
        console.log("Pug of index page rendered\n");})
      })
+     
 });
 
 app.get('/about', function(req, res) {
-  var html=pug.renderFile('views/about.pug');
+  var html=pug.renderFile('views/about.pug', {session: sess});
   res.send(html);
   console.log("Pug of about page rendered\n");
 });
 
 app.get('/account', function(req, res) {
-  res.render('account');
+  res.render('account', {session: sess});
   console.log("Pug of account page rendered\n");
 });
 
@@ -70,11 +74,8 @@ app.post('/flight',urlencodedParser, function(req, res) {
   knex('flight').where({'from_location': from, 'to_location': to}).join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
-        res.render('flightnotfound', {results:  results});
-      else if(!res.session.email){
-          res.redirect('/signin');
-      }
-      else res.render('flight', {results:  results,session: res.session.email});
+        res.render('flightnotfound', {results:  results, session: sess});
+      else res.render('flight', {results:  results,session: sess});
   });
 });
 
@@ -92,7 +93,10 @@ app.post('/signup',urlencodedParser, function(req, res) {
         res.render('signup',{msg : "Password entered do not match!!!"});
     else {
         knex('passenger_profile').insert(response).then(function(results){
-            req.session.email=response.email_id;
+            sess.isEnabled = true;
+            sess.email=response.email_id;
+            sess.fname = response.first_name;
+            sess.lname = response.last_name;
             res.redirect('/')
         }).catch(function(err){
             res.render('signup',{msg : "Account already exists with given details!!!"});
@@ -110,15 +114,19 @@ app.post('/signin',urlencodedParser, function(req, res) {
     knex('passenger_profile').where(response).select().then(function(results){
     var resultsExists='true';
       if(results.length==1){
-            req.session.email=response.email_id;
+            sess.isEnabled = true;
+            sess.email=response.email_id;
+            sess.fname = results[0].first_name;
+            sess.last_name = results[0].last_name;
             res.redirect('/')
       }
       else res.render('signin',{msg : "Username or pasword is invalid!!!"});
   });
 });
 
+
+//not implemented
 app.post('/book',urlencodedParser, function(req, res) {
-    //  console.log(req.body);
     response= {
     flight_no : req.body.flight_no,
     seats : req.body.seats,
@@ -134,10 +142,14 @@ app.post('/book',urlencodedParser, function(req, res) {
 });
 
 app.get('/history', function(req, res){
-    res.render('history');
+  if(sess.isEnabled)
+    res.render('history', {session: sess});
+  else res.render('signin',{msg : "Please Sign in to see history"})
 });
 
-app.get('/logout',function(res, req){
-    res.session.email=false;
+app.get('/logout',function(req, res){
+    sess.isEnabled = false;
+    sess.email=null;
+    res.redirect('/');
 })
 

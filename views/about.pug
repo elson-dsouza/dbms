@@ -17,9 +17,15 @@ html
           li.active
             a(href='#') ABOUT
           li#right
-            a(href='/signin') SIGN IN
+            if session.isEnabled
+              a(href='/logout') SIGN OUT
+            else
+              a(href='/signin') SIGN IN
           li#right
-            a(href='/signup') SIGN UP
+            if session.isEnabled
+              a(href='#') Welcome #{session.fname}
+            else
+              a(href='/signup') SIGN UP
     #placeholder
     div
       article
