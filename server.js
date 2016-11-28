@@ -61,6 +61,23 @@ app.get('/about', function(req, res) {
   console.log("Pug of about page rendered\n");
 });
 
+app.get('/account', function(req, res) {
+  res.render('account');
+  console.log("Pug of account page rendered\n");
+});
+
+
+app.get('/signin', function(req, res) {
+  res.render('signin');
+  console.log("Pug of signin page rendered\n");
+});
+
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+  console.log("Pug of signup page rendered\n");
+});
+
 app.get('/flight', function(req, res) {
   var from = req.headers.from;
   var to = req.headers.to;
