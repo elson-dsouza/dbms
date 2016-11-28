@@ -26,14 +26,14 @@ html
         form(method='post', action='/flight', id='searchForm')
           #book-upper
             #book-upper-center
-                select
+                select(name='from')
                   option(value= 0)  select
                   each item in rows
-                    option(value = item.from_location, name='from') #{item.from_location} 
-                select
+                    option(value = item.from_location) #{item.from_location} 
+                select(name='to')
                   option(value= 0)  select
                   each item in rows
-                    option(value = item.to_location, name = 'to') #{item.from_location} 
+                    option(value = item.from_location) #{item.from_location} 
                 
           #book-lower
             button(type='submit', form='searchForm', value='Submit') Submit
