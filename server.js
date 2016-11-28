@@ -62,7 +62,7 @@ app.get('/signup', function(req, res) {
 });
 
 app.post('/flight',urlencodedParser, function(req, res) {
-    console.log(req.body);
+  //console.log(req.body);
   var from = req.body.from;
   var to = req.body.to;
 
@@ -75,4 +75,25 @@ app.post('/flight',urlencodedParser, function(req, res) {
       else res.render('flight', {results:  results});
   });
 });
+
+app.post('/register',urlencodedParser, function(req, res) {
+    //  console.log(req.body);
+    response= { first_name : req.body.first_name,
+    last_name : req.body.last_name,
+    email_id : req.body.email,
+    password : req.body.password,
+    address : req.body.address,
+    tel_no : req.body.phone
+              };
+    var confirm_password = req.body.confirm_password;
+    if(confirm_password!=response[password])
+        res.render('signup',{msg : "Password entered do not match!!!"});
+    else {
+        knex('passenger_profile').insert(response).catch(function(err){
+            res.render('signup',{msg : "Insertion error!!!"});
+        })
+    }
+});
+app.get('/history', function(req, res){});
+
 
