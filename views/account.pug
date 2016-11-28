@@ -4,7 +4,7 @@ html
     title FlightDash
     link(rel='stylesheet', type='text/css', href='css/index.css')
   body
-  - var creditInfoAvailable = true;
+    //- - var creditInfoAvailable = true;
     #header
       header FlightDash
       nav
@@ -31,18 +31,18 @@ html
     div
       article
         #about
-          h1 Account Information of Elson Dsouza
+          h1 Account Information of #{session.fname} #{session.lname}
           //- h1 Account Information of #{results[0].first_name} #{results[0].last_name} 
           table
             tr
               td E-mail
-              td elson.dzouza@gmail.com
+              td #{session.email}
             tr
               td Phone
-              td 1234567890
+              td #{accountInfo.telno}
             tr 
               td Address
-              td 676, edfgh road,
+              td #{accountInfo.addess}
           hr
           
           if creditInfoAvailable
@@ -50,13 +50,13 @@ html
             table
               tr
                 td Credit Card Number
-                td 6522 5000 4303 4343
+                td #{creditInfo.cardNo}
               tr
                 td Type
-                td Visa
+                td #{creditInfo.type}
               tr 
                 td Expiry
-                td 07/23
+                td #{creditInfo.expiry}
           else
             h1 Credit card details
             form(method='post', action='/enterCreditCardDetails')

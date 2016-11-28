@@ -51,8 +51,20 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/account', function(req, res) {
-  if(sess.isEnabled)
-    res.render('account', {session: sess});
+  if(sess.isEnabled){
+    knex('passenger_profile').where({'email_id': sess.email}).select().then(function(results){
+      if(results.length==1)
+        var accountInfo = { email: results[0].email,
+                            telno: results[0].tel_no,
+                            addess: results[0].address}
+        var creditInfo = {
+          cardNo: '9663 7384 3384 4565',
+          type: 'Master Card',
+          expiry: '07/11'
+        }
+        res.render('account', {session: sess, creditInfoAvailable: false, accountInfo: accountInfo, creditInfo: creditInfo});
+    });
+  }
   else res.render('signin',{msg : "Please Sign in to see your account information"})
 });
 
