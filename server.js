@@ -91,6 +91,9 @@ app.post('/flight',urlencodedParser, function(req, res) {
   knex('flight').where({
     'from_location': from,
     'to_location': to}).select().then(function(results){
+    var resultsExists=true;
+      if(results.size==0)
+        resultsExists=false;
     console.log("results" + results[0].from_location);
       res.render('flight', {results:  results});
   });
