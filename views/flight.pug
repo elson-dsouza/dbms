@@ -23,13 +23,40 @@ html
     #placeholder
     div
       article
+        #about
+          h1 #{results[0].from_location} to #{results[0].to_location}
         each item in results
             #about
-                h1 #{item.from_location} to #{item.to_location}
-                p we are an online flight booking website. This app is done as a DBMS project!
+              div
+                .onethird
+                  h4 Flight No.
+                  h1 #{item.flight_id}
+                .twothird
+                  p 
+                    span
+                      b #{item.departure_time} 
+                    span to
+                    span
+                      b #{item.arrival_time}
+                  p Duration: #{item.duration}
+              hr
+              div
+                
+              div
+                h3 Price: 4500
+                form(method='post', action='book')
+                  input(type='hidden', name='flight_no', value='6E 789')
+                  label(for='seats') seats:
+                  input(type='number', name='seats', min='1', max='5')
+                  button(type='submit', form='searchForm', value='Submit') BOOK
 
-    #placeholder
-    #placeholder
+    br
+    br
+    br
+    br
+    br
+    br
+    br
     footer
       ul
         li
