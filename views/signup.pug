@@ -25,7 +25,8 @@ html
       article
         #about
           h1 Sign Up
-          form(method='post', action='/register')
+          form(method='post', action='/register', id='signUpForm')
+            #msg
             p
               label(value='Name') Name:
               input(type='text', placeholder='First Name', name='first_name')
@@ -46,7 +47,7 @@ html
               label(value='Telephone') Telephone:
               input(type='phone', placeholder='Phone number', name='phone')
             p 
-            
+              button(type='submit', form='signUpForm', value='Submit') SIGN UP
 
 
     footer
