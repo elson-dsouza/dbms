@@ -5,13 +5,13 @@ html
     link(rel='stylesheet', type='text/css', href='css/index.css')
   body
     #header
-      header  FlightDash
+      header FlightDash
       nav
         ul
           li
             a(href='/') HOME
-          li
-            a(href='/history') HISTORY
+          li.active
+            a(href='#') HISTORY
           li
             a(href='/account') ACCOUNT
           li
@@ -23,13 +23,10 @@ html
     #placeholder
     div
       article
-        each item in results
-            #about
-                h1 #{item.from_location} to #{item.to_location}
-                p we are an online flight booking website. This app is done as a DBMS project!
+        #about
+          h1 Account Information
+          p To be populated!
 
-    #placeholder
-    #placeholder
     footer
       ul
         li
