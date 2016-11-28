@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+//app.use(session({email: 'null'}));
 
  var knex = require('knex')({
    client: 'mysql',
@@ -66,9 +67,7 @@ app.post('/flight',urlencodedParser, function(req, res) {
   var from = req.body.from;
   var to = req.body.to;
 
-  knex('flight').join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').where({
-    'from_location': from,
-    'to_location': to}).select().then(function(results){
+  knex('flight').where({'from_location': from, 'to_location': to}).join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
         res.render('flightnotfound', {results:  results}); 
@@ -90,6 +89,7 @@ app.post('/register',urlencodedParser, function(req, res) {
         res.render('signup',{msg : "Password entered do not match!!!"});
     else {
         knex('passenger_profile').insert(response).then(function(results){
+            res.session.email=response.email_id;
             res.redirect('/')
         }).catch(function(err){
             res.render('signup');
