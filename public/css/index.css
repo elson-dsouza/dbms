@@ -89,7 +89,7 @@ li a:hover {
 	justify-content:space-around;
 }
 #book-upper-center{
-	/*align-self: center;*/
+	align-self: center;
 }
 
 #book-lower{
@@ -99,6 +99,10 @@ li a:hover {
 	vertical-align: bottom;
 	padding: 10px;
 	box-sizing: border-box;
+}
+table{
+	/*align-self: center;*/
+	margin: auto
 }
 /*article div p{
 	text-align: center;
