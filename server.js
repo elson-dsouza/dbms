@@ -51,8 +51,9 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/account', function(req, res) {
-  res.render('account', {session: sess});
-  console.log("Pug of account page rendered\n");
+  if(sess.isEnabled)
+    res.render('account', {session: sess});
+  else res.render('signin',{msg : "Please Sign in to see your account information"})
 });
 
 
