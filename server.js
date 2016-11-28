@@ -93,7 +93,7 @@ app.post('/flight',urlencodedParser, function(req, res) {
     'to_location': to}).select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
-        res.render('flightnotfound', {results:  results});
+        res.render('flightnotfound', {results:  results}); 
       else res.render('flight', {results:  results});
   });
 });
