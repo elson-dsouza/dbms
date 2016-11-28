@@ -85,7 +85,7 @@ app.get('/flight', function(req, res) {
 
   knex('flight').where({
     'from_location': from,
-    'to_location': to}).select().then(function(rows){
+    'to_location': to}).select().then(function(results){
     console.log("results" + results[0].from_location);
       res.render('flight', {results:  results});
   });
