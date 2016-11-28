@@ -20,23 +20,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
    }
  });
 
-//var mysql      = require('mysql');
-//var connection = mysql.createConnection({
-//    host : 'localhost',
-//    user : 'root',
-//    password : '',
-//    database : 'airline'
-//});
-
-//connection.connect(function(err) {
-//  if (err) {
-//    console.error('error connecting: ' + err.stack);
-//    return;
-//  }
-//
-//  console.log('connected as id ' + connection.threadId);
-//});
-
 var server = app.listen(8080, function () {
 	var host = server.address().address;
 	var port = server.address().port;
@@ -53,11 +36,6 @@ app.get('/',function(req,res){
        res.send(html);
        console.log("Pug of index page rendered\n");})
      })
-//  connection.query('SELECT distinct `from_location` FROM `flight` ORBER BY `from_location` asc', function (error, rows, fields) {
-//      var html=pug.renderFile('views/index_test.pug',{rows:rows});
-//      res.send(html);
-//      console.log("Pug of index page rendered\n");
-//    });
 });
 
 app.get('/about', function(req, res) {
@@ -92,19 +70,9 @@ app.post('/flight',urlencodedParser, function(req, res) {
     'from_location': from,
     'to_location': to}).select().then(function(results){
     var resultsExists=true;
-      if(results.size==0)
+      if(results.length==0)
         resultsExists=false;
-    console.log("results" + results[0].from_location);
-      res.render('flight', {results:  results});
+    res.render('flight', {results:  results, resultsExists: resultsExists});
   });
 });
-//app.use('/flight', flightRouter);
-
-// res.sendFile(path.join(__dirname + '/views/about.html'))
-//		knex.select().from('flight_details').then(function(rows) {console.log(rows); res.send(rows);})
-//		knex.select().from('credit_card_details').then(function(rows) {console.log(rows); res.send(rows);})
-//		knex.select().from('location').then(function(rows) {console.log(rows); res.send(rows);})
-//		knex.select().from('passenger_profile').then(function(rows) {console.log(rows); res.send(rows);})
-//		knex.select().from('ticket_info').then(function(rows) {console.log(rows); res.send(rows);})
-    //res.send("Test");
 
