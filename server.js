@@ -76,7 +76,7 @@ app.post('/flight',urlencodedParser, function(req, res) {
   });
 });
 
-app.post('/register',urlencodedParser, function(req, res) {
+app.post('/signup',urlencodedParser, function(req, res) {
     //  console.log(req.body);
     response= { first_name : req.body.first_name,
     last_name : req.body.last_name,
@@ -114,6 +114,25 @@ app.post('/signin',urlencodedParser, function(req, res) {
       else res.render('signin',{msg : "Username or pasword is invalid!!!"});
   });
 });
-app.get('/history', function(req, res){});
+
+app.post('/book',urlencodedParser, function(req, res) {
+    //  console.log(req.body);
+    response= {
+    email_id : req.body.email,
+    password : req.body.password,
+    };
+    knex('passenger_profile').where(response).select().then(function(results){
+    var resultsExists='true';
+      if(results.length==1){
+            req.session.email=response.email_id;
+            res.redirect('/')
+      }
+      else res.render('signin',{msg : "Username or pasword is invalid!!!"});
+  });
+});
+
+app.get('/history', function(req, res){
+    res.render('history');
+});
 
 
