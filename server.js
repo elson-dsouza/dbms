@@ -39,9 +39,9 @@ var server = app.listen(8080, function () {
   console.log("\nListening at http://%s:%s\n",host ,port);
 });
 
-// var flightRouter = require(__dirname + 'routes/flightRouter.js');
+var flightRouter = require('/routes/flightRouter.js');
 
-app.get('/',function(req,res){
+// app.get('/',function(req,res){
   //res.sendFile(path.join(__dirname + '/views/index.html'));
   // knex.select().from('flight').then(function(rows) {
   //   knex.distinct('from_location').select().from('flight').orderBy('from_location', 'asc').then(function(rows){
@@ -49,12 +49,12 @@ app.get('/',function(req,res){
   //     res.send(html);
   //     console.log("Pug of index page rendered\n");})
   //   })
-  connection.query('SELECT distinct `from_location` FROM `flight` ORBER BY `from_location` asc', function (error, rows, fields) {
-      var html=pug.renderFile('views/index_test.pug',{rows:rows});
-      res.send(html);
-      console.log("Pug of index page rendered\n");
-    });
-});
+//   connection.query('SELECT distinct `from_location` FROM `flight` ORBER BY `from_location` asc', function (error, rows, fields) {
+//       var html=pug.renderFile('views/index_test.pug',{rows:rows});
+//       res.send(html);
+//       console.log("Pug of index page rendered\n");
+//     });
+// });
 
 app.get('/about', function(req, res) {
   var html=pug.renderFile('views/about.pug');
@@ -62,14 +62,36 @@ app.get('/about', function(req, res) {
   console.log("Pug of about page rendered\n");
 });
 
-app.get('/flight', function(req, res) {
-  var from = req.headers.from;
-  var to = req.headers.to;
-  connection.query('SELECT * FROM `flight` WHERE `from_location` = "'+from+'"' + ' and `to_location` = "'+to+'"', function (error, results, fields) {
-    console.log("results" + results[0].from_location);
-      res.render('flight', {results:  results});
-  });
+app.get('/account', function(req, res) {
+  res.render('account');
+  console.log("Pug of account page rendered\n");
 });
+
+app.get('/signin', function(req, res) {
+  res.render('signin');
+  console.log("Pug of account page rendered\n");
+});
+app.post('/signin', function(req, res){
+  res.send("site under construction");
+});
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+  console.log("Pug of account page rendered\n");
+});
+app.post('/signup', function(req, res){
+  res.send("site under construction");
+});
+
+// app.get('/flight', function(req, res) {
+//   var from = req.headers.from;
+//   var to = req.headers.to;
+//   connection.query('SELECT * FROM `flight` WHERE `from_location` = "'+from+'"' + ' and `to_location` = "'+to+'"', function (error, results, fields) {
+//     console.log("results" + results[0].from_location);
+//       res.render('flight', {results:  results});
+//   });
+// });
+
 
 // app.use('/flight', flightRouter);
 
