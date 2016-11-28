@@ -79,9 +79,9 @@ app.get('/signup', function(req, res) {
   console.log("Pug of signup page rendered\n");
 });
 
-app.get('/flight', function(req, res) {
-  var from = req.headers.from;
-  var to = req.headers.to;
+app.post('/flight', function(req, res) {
+  var from = req.body.from;
+  var to = req.body.to;
 
   knex('flight').where({
     'from_location': from,
