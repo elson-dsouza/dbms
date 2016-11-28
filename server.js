@@ -5,6 +5,10 @@ app.use(express.static('views'))
 var path = require('path');
 var pug= require('pug');
 app.set('view engine', 'pug')
+var bodyParser = require('body-parser');
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
  var knex = require('knex')({
    client: 'mysql',
@@ -79,7 +83,8 @@ app.get('/signup', function(req, res) {
   console.log("Pug of signup page rendered\n");
 });
 
-app.post('/flight', function(req, res) {
+app.post('/flight',urlencodedParser, function(req, res) {
+    console.log(req.body);
   var from = req.body.from;
   var to = req.body.to;
 
