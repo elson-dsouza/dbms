@@ -67,12 +67,14 @@ app.post('/flight',urlencodedParser, function(req, res) {
   //console.log(req.body);
   var from = req.body.from;
   var to = req.body.to;
-
   knex('flight').where({'from_location': from, 'to_location': to}).join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
-        res.render('flightnotfound', {results:  results,session: res.session.email});
-      else res.render('flight', {results:  results});
+        res.render('flightnotfound', {results:  results});
+      else if(!res.session.email){
+          res.redirect('/signin');
+      }
+      else res.render('flight', {results:  results,session: res.session.email});
   });
 });
 
@@ -118,8 +120,8 @@ app.post('/signin',urlencodedParser, function(req, res) {
 app.post('/book',urlencodedParser, function(req, res) {
     //  console.log(req.body);
     response= {
-    email_id : req.body.email,
-    password : req.body.password,
+    flight_no : req.body.flight_no,
+    seats : req.body.seats,
     };
     knex('passenger_profile').where(response).select().then(function(results){
     var resultsExists='true';
@@ -135,4 +137,7 @@ app.get('/history', function(req, res){
     res.render('history');
 });
 
+app.get('/logout',function(res, req){
+    res.session.email=false;
+})
 
