@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title My Travel Website
+    link(rel='stylesheet', type='text/css', href='css/index.css')
+  body
+    #header
+      header  My Travel Website
+      nav
+        ul
+          li
+            a(href='/') HOME
+          li
+            a(href='#') HISTORY
+          li
+            a(href='#') ACCOUNT
+          li.active
+            a(href='/about') ABOUT
+          li#right
+            a(href='') SIGN IN
+          li#right
+            a(href='') SIGN UP
+    #placeholder
+    div
+      article
+        each item in results
+            #about
+                h1 #{item.from_location} to #{item.to_location}
+                p we are an online flight booking website. This app is done as a DBMS project!
+    footer
+      ul
+        li
+        | This website is made by Eshwar, Elson, Gopan, Antony
