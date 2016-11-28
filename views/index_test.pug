@@ -23,7 +23,7 @@ html
     #placeholder
     article
       #book
-        form(method='post', action='/flight')
+        form(method='post', action='/flight', id='searchForm')
           #book-upper
             #book-upper-center
                 select
@@ -36,7 +36,7 @@ html
                     option(value = item.to_location, name = 'to') #{item.from_location} 
                 
           #book-lower
-            button(type='submit', form='form1', value='Submit') Submit
+            button(type='submit', form='searchForm', value='Submit') Submit
         //- form
         //-   .onethird  
         //-   .onethird  hello
