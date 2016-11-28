@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    title FlightDash
+    link(rel='stylesheet', type='text/css', href='css/index.css')
+  body
+    #header
+      header  FlightDash
+      nav
+        ul
+          li
+            a(href='/') HOME
+          li
+            a(href='/history') HISTORY
+          li
+            a(href='/account') ACCOUNT
+          li
+            a(href='/about') ABOUT
+          li#right
+            if session.isEnabled
+              a(href='/logout') SIGN OUT
+            else
+              a(href='/signin') SIGN IN
+          li#right
+            if session.isEnabled
+              a(href='#') Welcome #{session.fname}
+            else
+              a(href='/signup') SIGN UP
+    #placeholder
+    div
+      article
+        #about
+          h1 Sign Up
+          h5#msg #{msg}
+          form(method='post', action='/enterCreditCardDetails', id='creditForm')
+            
+            p
+              label(value='cardNo') Card Number:
+              input(type='text', placeholder='XXXX XXXX XXXX XXXX', name='card_no')
+            p
+              label(value='cardType') Card Type:
+              input(type='text', placeholder='Visa', name='card_type')
+            p
+              label(value='emonth') Expiry month:
+              input(type='number', placeholder='07', name='emonth')
+            p
+              label(value='eyear') Expiry Year:
+              input(type='number', placeholder='23', name='eyear')
+            p 
+              button(type='submit', form='creditForm', value='Submit') SAVE
+
+    footer
+      ul
+        li
+        | This website is made by Eshwar, Elson, Gopan, Antony

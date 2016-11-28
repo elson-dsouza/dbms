@@ -62,7 +62,7 @@ app.get('/account', function(req, res) {
           type: 'Master Card',
           expiry: '07/11'
         }
-        res.render('account', {session: sess, creditInfoAvailable: false, accountInfo: accountInfo, creditInfo: creditInfo});
+        res.render('account', {session: sess, creditInfoAvailable: true, accountInfo: accountInfo, creditInfo: creditInfo});
     });
   }
   else res.render('signin',{msg : "Please Sign in to see your account information"})
@@ -164,5 +164,17 @@ app.get('/logout',function(req, res){
     sess.isEnabled = false;
     sess.email=null;
     res.redirect('/');
-})
+});
+
+app.get('/enterCreditCardDetails', function(req, res){
+  res.render('fillCreditCard', {session: sess});
+});
+app.post('/enterCreditCardDetails', function(req, res){
+    response= { card_number : req.body.card_no,
+                card_type : req.body.card_type,
+                expiration_month : req.body.emonth,
+                expiration_year : req.body.eyear
+              };
+    //put the response in the database, check data types
+});
 

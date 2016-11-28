@@ -59,8 +59,8 @@ html
                 td #{creditInfo.expiry}
           else
             h1 Credit card details
-            form(method='post', action='/enterCreditCardDetails')
-              button(type='submit', form='searchForm', value='Submit') Enter New Credit Card Information
+            form(method='get', action='/enterCreditCardDetails' id='fillCreditInfoForm')
+              button(type='submit', form='fillCreditInfoForm', value='Submit') Enter New Credit Card Information
 
 
     footer
