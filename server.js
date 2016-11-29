@@ -87,8 +87,16 @@ app.post('/flight',urlencodedParser, function(req, res) {
   knex('flight').where({'from_location': from, 'to_location': to}).join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
+<<<<<<< c3efb7439115f165a464a18e9a027f84f8007292
         res.render('flightnotfound', {results:  results, session: sess});
       else res.render('flight', {results:  results,session: sess});
+=======
+        res.render('flightnotfound', {results:  results});
+      else if(res.session.email){
+          res.render('flight', {results:  results,session: res.session.email});
+      }
+      else res.redirect('/signin');
+>>>>>>> bug fixes
   });
 });
 
@@ -160,6 +168,7 @@ app.get('/history', function(req, res){
   else res.render('signin',{msg : "Please Sign in to see history"})
 });
 
+<<<<<<< c3efb7439115f165a464a18e9a027f84f8007292
 app.get('/logout',function(req, res){
     sess.isEnabled = false;
     sess.email=null;
@@ -177,4 +186,10 @@ app.post('/enterCreditCardDetails', function(req, res){
               };
     //put the response in the database, check data types
 });
+=======
+app.get('/logout',function(res, req){
+    req.session.email=false;
+    res.redirect('/');
+})
+>>>>>>> bug fixes
 
