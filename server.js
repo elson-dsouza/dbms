@@ -84,7 +84,7 @@ app.post('/flight',urlencodedParser, function(req, res) {
   //console.log(req.body);
   var from = req.body.from;
   var to = req.body.to;
-  knex('flight').where({'from_location': from, 'to_location': to}).join('flight_details', 'flight.flight_id', '=', 'flight_details.flight_id').select().then(function(results){
+  knex('flight').where({'from_location': from, 'to_location': to}).select().then(function(results){
     var resultsExists='true';
       if(results.length==0)
         res.render('flightnotfound', {results:  results, session: sess});
@@ -143,15 +143,14 @@ app.post('/book',urlencodedParser, function(req, res) {
     response= {
     flight_no : req.body.flight_no,
     seats : req.body.seats,
+    email_id : req.body.email
     };
-    knex('passenger_profile').where(response).select().then(function(results){
-    var resultsExists='true';
-      if(results.length==1){
-            req.session.email=response.email_id;
-            res.redirect('/')
-      }
-      else res.render('signin',{msg : "Username or pasword is invalid!!!"});
-  });
+    if(response.email_id == null){
+      res.render('signin',{msg : "Please sign in to Book tickets"});
+    }
+    else{
+      //check if credit card details are enabled to user
+    }
 });
 
 app.get('/history', function(req, res){
@@ -175,6 +174,6 @@ app.post('/enterCreditCardDetails', function(req, res){
                 expiration_month : req.body.emonth,
                 expiration_year : req.body.eyear
               };
-    //put the response in the database, check data types
+    // put the response in the database, check data types
 });
 

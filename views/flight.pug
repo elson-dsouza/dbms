@@ -49,11 +49,14 @@ html
               div
                 
               div
-                h3 Price: #{item.price}
+                h3 Price: 4500
                 form(method='post', action='book')
                   input(type='hidden', name='flight_no', value='6E 789')
                   label(for='seats') seats:
                   input(type='number', name='seats', min='1', max='5')
+                  if session.isEnabled
+                    input(type='hidden', value='#{session.email}', name='email')
+                  else input(type='hidden', value='null', name='email')
                   button(type='submit', form='searchForm', value='Submit') BOOK
 
         br
