@@ -168,9 +168,6 @@ app.post('/book',urlencodedParser, function(req, res) {
 app.get('/history', function(req, res){
   if(sess.isEnabled){
     //fetch history for current user
-    if(results.length > 0)
-      hasHistory = true;
-    else hasHistory = false;
     results = [{
       flight_id: '6E 678',
       flight_departure_date: '',
@@ -188,6 +185,9 @@ app.get('/history', function(req, res){
       from_location: 'Bengaluru',
       to_location: 'Chennai'
     }];
+    if(results.length > 0)
+      hasHistory = true;
+    else hasHistory = false;
     if(hasHistory)
       res.render('history', {session: sess, results: results});
     else 
