@@ -143,13 +143,25 @@ app.post('/book',urlencodedParser, function(req, res) {
     response= {
     flight_no : req.body.flight_no,
     seats : req.body.seats,
-    email_id : req.body.email
+    email_id : req.body.email,
+    date : req.body.date
     };
     if(response.email_id == null){
       res.render('signin',{msg : "Please sign in to Book tickets"});
     }
     else{
-      //check if credit card details are enabled to user
+        knex('passenger_profile').where({email_id:response.email_id}).select({profile_id}).then(function(results){
+            if(results.length==1){
+                knex('credit_card_details').where(results).select().then(function(result){
+                    if(result.length==0)
+                        res.redirect('/account');
+                    else {
+                        knex('ticket_info').insert({profile_id : result[0].profile_id, flight_id : response.flight_no, flight_departure_date : response, flight_departure_date : response.date , status: response.seats });
+                        knex('flight_details').update({available_seats: available_seats-response.seats});
+                    }
+                });
+            }
+        })
     }
 });
 
