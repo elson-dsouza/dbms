@@ -201,4 +201,9 @@ app.post('/enterCreditCardDetails', function(req, res){
               };
     // put the response in the database, check data types
 });
+app.get('/logout',function(res, req){
+    req.session.email=false;
+    res.redirect('/');
+})
+
 
