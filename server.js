@@ -166,8 +166,33 @@ app.post('/book',urlencodedParser, function(req, res) {
 });
 
 app.get('/history', function(req, res){
-  if(sess.isEnabled)
-    res.render('history', {session: sess});
+  if(sess.isEnabled){
+    //fetch history for current user
+    if(results.length > 0)
+      hasHistory = true;
+    else hasHistory = false;
+    results = [{
+      flight_id: '6E 678',
+      flight_departure_date: '',
+      status: '4 tickets',
+      arrival_time: '6:08:00',
+      departure_time: '7:08:00',
+      from_location: 'Bengaluru',
+      to_location: 'Chennai'
+    },{
+      flight_id: '6E 500',
+      flight_departure_date: '',
+      status: '5 tickets',
+      arrival_time: '6:08:00',
+      departure_time: '7:08:00',
+      from_location: 'Bengaluru',
+      to_location: 'Chennai'
+    }];
+    if(hasHistory)
+      res.render('history', {session: sess, results: results});
+    else 
+      res.render('nohistory', {session: sess});
+  }
   else res.render('signin',{msg : "Please Sign in to see history"})
 });
 

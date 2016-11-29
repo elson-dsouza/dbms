@@ -5,12 +5,12 @@ html
     link(rel='stylesheet', type='text/css', href='css/index.css')
   body
     #header
-      header FlightDash
+      header  FlightDash
       nav
         ul
           li
             a(href='/') HOME
-          li.active
+          li
             a(href='#') HISTORY
           li
             a(href='/account') ACCOUNT
@@ -29,10 +29,25 @@ html
     #placeholder
     div
       article
-        #about
-          h1 Account Information
-          p To be populated!
-
+        each item in results
+            #about
+              div
+                .onethird
+                  h4 Flight No.
+                  h1 #{item.flight_id}
+                .twothird
+                  p 
+                    span
+                      b #{item.departure_time} 
+                    span to 
+                    span
+                      b #{item.arrival_time}
+                  p Duration: #{item.duration}
+        br
+        br
+        br
+        br
+        br
     footer
       ul
         li

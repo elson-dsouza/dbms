@@ -41,6 +41,7 @@ html
                   option(value= 0)  select
                   each item in rows
                     option(value = item.from_location) #{item.from_location} 
+                input(type = 'date', name = 'date')
                 
           #book-lower
             button(type='submit', form='searchForm', value='Submit') Submit
