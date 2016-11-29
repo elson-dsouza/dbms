@@ -62,7 +62,7 @@ app.get('/account', function(req, res) {
           type: 'Master Card',
           expiry: '07/11'
         }
-        res.render('account', {session: sess, creditInfoAvailable: true, accountInfo: accountInfo, creditInfo: creditInfo});
+        res.render('account', {session: sess, creditInfoAvailable: false, accountInfo: accountInfo, creditInfo: creditInfo});
     });
   }
   else res.render('signin',{msg : "Please Sign in to see your account information"})
