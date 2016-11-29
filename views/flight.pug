@@ -56,7 +56,8 @@ html
                   input(type='number', name='seats', min='1', max='5')
                   if session.isEnabled
                     input(type='hidden', value='#{session.email}', name='email')
-                  else input(type='hidden', value='null', name='email')
+                  else 
+                    input(type='hidden', value='null', name='email')
                   button(type='submit', form='searchForm', value='Submit') BOOK
 
         br
